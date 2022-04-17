@@ -18,7 +18,13 @@ const productReducer = (state = initialState, action) => {
     case PRODUCT_LIST_REQUEST:
       return { ...state, loading: true };
     case PRODUCT_LIST_SUCCESS:
-      return { ...state, loading: false, products: action.payload };
+      return {
+        ...state,
+        loading: false,
+        pages: action.payload.pages,
+        page: action.payload.page,
+        products: action.payload.products,
+      };
     case PRODUCT_LIST_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
@@ -34,7 +40,7 @@ const productDetailsReducer = (
     case PRODUCT_DETAILS_REQUEST:
       return { ...state, loading: true };
     case PRODUCT_DETAILS_SUCCESS:
-      return { ...state, loading: false, product:action.payload };
+      return { ...state, loading: false, product: action.payload };
     case PRODUCT_DETAILS_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
@@ -42,4 +48,4 @@ const productDetailsReducer = (
   }
 };
 
-export { productReducer,productDetailsReducer };
+export { productReducer, productDetailsReducer };

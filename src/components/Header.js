@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { logout } from "../redux/actions/UserActions";
 
+
 const Header = ({location}) => {
+  
+  const [keyword,setKeyword] = useState()
+  let history = useHistory()
+  
+
   const cart = useSelector((state) => state.cart);
 const dispatch = useDispatch()
 
@@ -15,17 +21,24 @@ const dispatch = useDispatch()
     dispatch(logout())
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+ if(keyword){
+   history.push(`/search/${keyword}`)
+ } else {
+   history.push('/')
+ }
+      
+  }
+
   return (
     <div>
       {/* Top Header */}
       <div className="Announcement ">
         <div className="container">
-          <div className="row">
-            <div className="col-md-6 d-flex align-items-center display-none">
-              <p>+255 768 356 890</p>
-              <p>info@zpunet.com</p>
-            </div>
-            <div className=" col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
+          <div className="row  justify-content-center">
+      
+            <div className=" col-12 col-lg-6 justify-content-center  d-flex align-items-center">
               <Link to="">
                 <i className="fab fa-facebook-f"></i>
               </Link>
@@ -36,10 +49,10 @@ const dispatch = useDispatch()
                 <i className="fab fa-linkedin-in"></i>
               </Link>
               <Link to="">
-                <i className="fab fa-youtube"></i>
+                <i className="fab fa-github"></i>
               </Link>
               <Link to="">
-                <i className="fab fa-pinterest-p"></i>
+                <i className="fab fa-vk"></i>
               </Link>
             </div>
           </div>
@@ -54,7 +67,7 @@ const dispatch = useDispatch()
               <div className="row ">
                 <div className="col-6 d-flex align-items-center">
                   <Link className="navbar-brand" to="/">
-                    <img alt="logo" src="/images/logo.png" />
+                    <img alt="logo" src="/logo22.png" />
                   </Link>
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
@@ -108,11 +121,12 @@ const dispatch = useDispatch()
                   </Link>
                 </div>
                 <div className="col-12 d-flex align-items-center">
-                  <form className="input-group">
+                  <form onSubmit={handleSubmit} className="input-group">
                     <input
                       type="search"
                       className="form-control rounded search"
                       placeholder="Search"
+                      onChange={(e)=>setKeyword(e.target.value)}
                     />
                     <button type="submit" className="search-button">
                       search
@@ -128,15 +142,16 @@ const dispatch = useDispatch()
             <div className="row">
               <div className="col-md-3 col-4 d-flex align-items-center">
                 <Link className="navbar-brand" to="/">
-                  <img alt="logo" src="/images/logo.png" />
+                  <img alt="logo" src="/logo22.png" />
                 </Link>
               </div>
               <div className="col-md-6 col-8 d-flex align-items-center">
-                <form className="input-group">
+                <form onSubmit={handleSubmit} className="input-group">
                   <input
                     type="search"
                     className="form-control rounded search"
                     placeholder="Search"
+                    onChange={(e)=>setKeyword(e.target.value)}
                   />
                   <button type="submit" className="search-button">
                     search

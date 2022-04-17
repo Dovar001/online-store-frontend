@@ -27,8 +27,9 @@ const CartScreen = ({ match, location,history }) => {
   }, [dispatch, productId, qty]);
 
   const handleCheckout = (e) =>{
- e.preventDefault()
+    e.preventDefault()
      history.push('/login?redirect=shipping')
+    
   }
 
   const handleRemoveFromCart = (id) => {
